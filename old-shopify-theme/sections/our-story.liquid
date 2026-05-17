@@ -1,0 +1,224 @@
+<style>
+  #shopify-section-{{ section.id }} .our-products-section {
+    max-width: 100%;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+    margin-top: 5rem;
+    padding: 20px 30px 50px 20px;
+  }
+  #shopify-section-{{ section.id }} .section-container {
+    width: 70%;
+    height: 100%;
+    margin: 0 auto; 
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .page-title {
+    font-family: "Caslon Italian One","Caslon Italian Two","Caslon Italian Mac One","Caslon Italian Mac Two";
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    color: #ff6236;
+    line-height: 1;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 20rem;
+    }
+  }
+  @media screen and (min-width: 1350px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 28rem;
+    }
+  }
+  #shopify-section-{{ section.id }} .image-container img {
+    max-height: 65rem;
+    max-width: 70rem;
+    width: 100%;
+    height: 100%;
+    min-width: 50rem;
+    min-height: 50rem;
+    border-radius: 34px;
+  }
+  #shopify-section-{{ section.id }} .section-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+
+  }
+  #shopify-section-{{ section.id }} .text-container {
+    max-width: 70%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  #shopify-section-{{ section.id }} .text-container p {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    margin: 5rem 0;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container {
+    display: flex;
+    justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary {
+    background-color: white;
+    color: #477258;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.06px;
+    padding: 3rem 6.5rem;
+    border-radius: 30px;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::after {
+    border-radius: 10px;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::before {
+    border-radius: 10px;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary:hover {
+    background-color: white;
+    color: #477258;
+  }
+
+  @media screen and (max-width: 1060px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 18rem;
+      margin: 0;
+    }
+    #shopify-section-{{ section.id }} .image-container img {
+      min-width: 40rem;
+      min-height: 40rem;
+    }
+    #shopify-section-{{ section.id }} .text-container {
+      max-width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 910px) {
+    #shopify-section-{{ section.id }} .image-container img {
+      min-width: 30rem;
+      min-height: 30rem;
+    }
+    #shopify-section-{{ section.id }} .text-container p {
+      font-size: 3rem;
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 16rem;
+    }
+  }
+
+  @media screen and (max-width: 660px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 16rem;
+    }
+    #shopify-section-{{ section.id }} .section-container {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 440px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 3.8rem;
+    }
+    #shopify-section-{{ section.id }} .text-container {
+      max-width: 100%;
+    }
+    #shopify-section-{{ section.id }} .our-products-section {
+      margin-top: 0rem;
+    }
+    #shopify-section-{{ section.id }} .cta-button-container .button.button--primary {
+      font-size: 16px;
+      padding: 2rem 3rem;
+    }
+    #shopify-section-{{ section.id }} .text-container p {
+      font-size: 1.4rem;
+      margin: 3rem 0;
+    }
+    #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::after {
+      border-radius: 20px;
+    }
+    #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::before {
+      border-radius: 20px;
+    }
+  }
+</style>
+
+<section class="our-products-section">
+  <div class="section-header"><h2 class="page-title h2">{{ section.settings.section_heading }}</h2></div>
+  <div class="section-container">
+    {% for block in section.blocks %}
+      <div class="section-card">
+        <div class="image-container">
+          {% if block.settings.block_image_picker != blank %}
+            <img src="{{ block.settings.block_image_picker | img_url: 'master' }}" />
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="text-container"><p>{{ section.settings.section_text }}</p></div>
+  <div class="cta-button-container"><a href="{% if section.settings.section_url !=blank %} {{ section.settings.section_url }} {% else %}#{% endif %}" class="button button--primary">{{ section.settings.button_text }}</a></div>
+</section>
+
+{% schema %}
+{
+  "name": "Our products",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Our products heading",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "section_text",
+      "label": "Our products heading",
+      "default": "Unto was started as a rural recovery project with the goal to bring life back to neglected pockets of Tuscan land. These fertile grounds sustained rich agriculture for centuries but fell into abandonment following rural depopulation since the ’50s. It is in this setting that our independent farming community was born. Producing a range of superior quality olive oils is the first step on our journey to restore and revive the land and our heritage. Join us."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Read more"
+    },
+    {
+      "type": "url",
+      "id": "section_url",
+      "label": "Link to the button section",
+      "info": "Click on the button leads to this link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Image slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_image_picker",
+          "label": "Select image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our story"
+    }
+  ]
+}
+{% endschema %}

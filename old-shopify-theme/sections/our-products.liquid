@@ -1,0 +1,214 @@
+<style>
+  #shopify-section-{{ section.id }} .our-products-section {
+    max-width: 100%;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+    margin-top: 5rem;
+    background-color: #dbff00;
+    padding: 20px 30px 50px 20px;
+  }
+  #shopify-section-{{ section.id }} .section-container {
+    width: 100%;
+    height: 100%;
+  }
+  #shopify-section-{{ section.id }} .page-title {
+    font-family: "Caslon Italian One","Caslon Italian Two","Caslon Italian Mac One","Caslon Italian Mac Two";
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 10rem;
+    }
+    #shopify-section-{{ section.id }} .image-container img {
+      max-height: 65rem;
+      max-width: 70rem;
+      min-width: 50rem;
+      min-height: 50rem;
+    }
+  }
+  @media screen and (min-width: 1350px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 20rem;
+    }
+    #shopify-section-{{ section.id }} .image-container img {
+      max-height: 65rem;
+      max-width: 70rem;
+    }
+  }
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .image-container img {
+      max-height: 40rem;
+      max-width: 40rem;
+      min-width: 40rem;
+      min-height: 40rem;
+    }
+  }
+  #shopify-section-{{ section.id }} .image-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 34px;
+  }
+  #shopify-section-{{ section.id }} .section-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+
+  }
+  #shopify-section-{{ section.id }} .text-container {
+    max-width: 60%;
+    text-align: center;
+  }
+  #shopify-section-{{ section.id }} .text-container p {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    margin: 5rem 0;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container {
+    display: flex;
+    justify-content: center;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary {
+    background-color: white;
+    color: #477258;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.06px;
+    padding: 3rem 6.5rem;
+    border-radius: 30px;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::after {
+    border-radius: 26px;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::before {
+    border-radius: 26px;
+  }
+  #shopify-section-{{ section.id }} .cta-button-container .button.button--primary:hover {
+    background-color: white;
+    color: #477258;
+  }
+
+  @media screen and (max-width: 750px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 6rem;
+    }
+    #shopify-section-{{ section.id }} .text-container {
+      max-width: 80%;
+      text-align: center;
+    }
+  }
+
+
+  @media screen and (max-width: 440px) {
+    #shopify-section-{{ section.id }} .page-title {
+      font-size: 3.8rem;
+      margin: 0;
+    }
+    #shopify-section-{{ section.id }} .text-container {
+      max-width: 100%;
+    }
+    #shopify-section-{{ section.id }} .our-products-section {
+      margin-top: 3rem;
+    }
+    #shopify-section-{{ section.id }} .cta-button-container .button.button--primary {
+      font-size: 16px;
+      padding: 2rem 3rem;
+    }
+    #shopify-section-{{ section.id }} .text-container p {
+      font-size: 1.4rem;
+      margin: 3rem 0;
+    }
+    #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::after {
+      border-radius: 20px;
+    }
+    #shopify-section-{{ section.id }} .cta-button-container .button.button--primary::before {
+      border-radius: 20px;
+    }
+    #shopify-section-{{ section.id }} .image-container img {
+      max-height: 30rem;
+      max-width: 30rem;
+      min-width: 30rem;
+      min-height: 30rem;
+    }
+  }
+</style>
+
+<section class="our-products-section">
+  <div class="section-header"><h2 class="page-title h2">{{ section.settings.section_heading }}</h2></div>
+  <div class="section-container">
+    {% for block in section.blocks %}
+      <div class="section-card">
+        <div class="image-container">
+          {% if block.settings.block_image_picker != blank %}
+            <img src="{{ block.settings.block_image_picker | img_url: 'master' }}" />
+          {% else %}
+            <img src="{{ block.settings.section_product.featured_image | img_url: 'master' }}" />
+          {% endif %}
+        </div>
+        <div class="text-container"><p>{{ block.settings.long_text }}</p></div>
+      </div>
+      <div class="cta-button-container"><a href="{% if block.settings.block_url !=blank %} {{ block.settings.block_url }} {% else %} {{ block.settings.section_product.url }} {% endif %}" class="button button--primary">{{ block.settings.button_text }}</a></div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our products",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Our products heading",
+      "default": "Our Products"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Image and text slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_image_picker",
+          "label": "Select image"
+        },
+        {
+          "type": "text",
+          "id": "long_text",
+          "label": "Product text"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text"
+        },
+        {
+          "type": "url",
+          "id": "block_url",
+          "label": "Link to the button section",
+          "info": "Click on the button leads to this link"
+        },
+        {
+          "type": "product",
+          "id": "section_product",
+          "label": "Select product",
+          "info": "If product is selected, if will display featured image of the product, but only if the option for selecting image is empty"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'Caslon Italian Two';
+  src: url(https://cdn.shopify.com/s/files/1/0580/0879/7371/files/CaslonItalian-Roman-Web.woff2?v=1669929670) format('woff2');
+}
+
+@font-face {
+  font-family: 'Caslon Italian One';
+  src: url(https://cdn.shopify.com/s/files/1/0580/0879/7371/files/CaslonItalian-Roman-Web.woff?v=1669929670) format('woff');
+}
+
+@font-face {
+  font-family: 'Caslon Italian Mac One';
+  src: url(https://cdn.shopify.com/s/files/1/0580/0879/7371/files/MACCaslonItalian-Roman-Web.woff?v=1669989485) format('woff');
+}
+
+@font-face {
+  font-family: 'Caslon Italian Mac Two';
+  src: url(https://cdn.shopify.com/s/files/1/0580/0879/7371/files/MACCaslonItalian-Roman-Web.woff2?v=1669989485) format('woff2');
+}
