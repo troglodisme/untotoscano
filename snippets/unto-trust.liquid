@@ -1,0 +1,6 @@
+{%- comment -%} Unto: the three things a gift buyer checks before buying. Params: product {%- endcomment -%}
+<ul class="u-trust" role="list">
+  <li><span>{{ settings.unto_cutoff_label | escape }}. <span class="u-countdown" data-short data-unto-countdown="{{ settings.unto_cutoff_date | escape }}"></span></span></li>
+  {%- if settings.unto_shipping_note != blank -%}<li>{{ settings.unto_shipping_note | escape }}</li>{%- endif -%}
+  <li>Sending it as a gift? Add a note in your cart.</li>
+</ul>

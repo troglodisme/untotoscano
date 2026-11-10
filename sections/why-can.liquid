@@ -1,17 +1,13 @@
-{%- comment -%} Unto 2026: why this harvest comes in a can. {%- endcomment -%}
-<div class="unto-why color-{{ section.settings.color_scheme }} gradient">
-  <div class="page-width unto-why__inner">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="unto-why__heading">{{ section.settings.heading | escape }}</h2>
-    {%- endif -%}
-    {%- if section.settings.intro != blank -%}
-      <p class="unto-why__intro">{{ section.settings.intro | escape }}</p>
-    {%- endif -%}
-    <ul class="unto-why__list" role="list">
+{%- comment -%} Unto: why this harvest comes in a tin. One giant word per reason. {%- endcomment -%}
+<div class="u-block u-combo-{{ section.settings.combo }} u-why">
+  <div class="u-wrap u-stack u-center">
+    {%- if section.settings.label != blank -%}<p class="u-label">{{ section.settings.label | escape }}</p>{%- endif -%}
+    {%- if section.settings.intro != blank -%}<p class="u-statement">{{ section.settings.intro | escape }}</p>{%- endif -%}
+    <ul class="u-why__list" role="list">
       {%- for block in section.blocks -%}
-        <li class="unto-why__item" {{ block.shopify_attributes }}>
-          <p class="unto-why__title">{{ block.settings.title | escape }}</p>
-          <p class="unto-why__text">{{ block.settings.text | escape }}</p>
+        <li class="u-why__item" {{ block.shopify_attributes }}>
+          <span class="u-display u-fit" style="--n: {{ block.settings.word | size }};" data-max="150" aria-hidden="true">{{ block.settings.word | escape }}</span>
+          <p class="u-copy"><span class="visually-hidden">{{ block.settings.word | escape }}: </span>{{ block.settings.text | escape }}</p>
         </li>
       {%- endfor -%}
     </ul>
@@ -20,42 +16,34 @@
 
 {% schema %}
 {
-  "name": "Why a can",
+  "name": "Why a tin",
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Why a can this year" },
-    { "type": "text", "id": "intro", "label": "Intro", "default": "This harvest comes in a 250ml tin only." },
-    {
-      "type": "select", "id": "color_scheme", "label": "Color scheme", "default": "background-1",
-      "options": [
-        { "value": "accent-1", "label": "Accent 1" },
-        { "value": "accent-2", "label": "Accent 2" },
-        { "value": "background-1", "label": "Background 1" },
-        { "value": "background-2", "label": "Background 2" },
-        { "value": "inverse", "label": "Inverse" }
-      ]
-    }
+    { "type": "select", "id": "combo", "label": "Colours", "default": "sky", "options": [
+        { "value": "neon", "label": "Neon oil + green" },
+        { "value": "green", "label": "Green + white" },
+        { "value": "olive-red", "label": "Olive red + leaf" },
+        { "value": "sky", "label": "Sky + green" },
+        { "value": "sunflower", "label": "Sunflower + earth" },
+        { "value": "sand", "label": "Sand + green" },
+        { "value": "heat", "label": "Heat + olive red" },
+        { "value": "leaf", "label": "Leaf + olive red" },
+        { "value": "paper", "label": "Paper + green" }
+      ] },
+    { "type": "text", "id": "label", "label": "Label", "default": "Why a tin:" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "This harvest comes in a 250ml tin only." }
   ],
   "blocks": [
     {
       "type": "point",
-      "name": "Point",
+      "name": "Reason",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Lighter to ship" },
+        { "type": "text", "id": "word", "label": "Big word", "default": "Light" },
         { "type": "textarea", "id": "text", "label": "Text" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Why a can",
-      "blocks": [
-        { "type": "point", "settings": { "title": "Lighter to ship", "text": "A tin weighs a fraction of a glass bottle, so it costs less to send and doesn't break in the post." } },
-        { "type": "point", "settings": { "title": "Keeps the light out", "text": "Light is what spoils olive oil. The tin keeps it dark, so the oil stays fresh for longer." } },
-        { "type": "point", "settings": { "title": "100% recyclable", "text": "Steel tins can be recycled again and again. Rinse it and put it in your household recycling." } }
-      ]
-    }
-  ]
+  "presets": [{ "name": "Why a tin" }]
 }
 {% endschema %}

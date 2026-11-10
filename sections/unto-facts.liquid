@@ -1,0 +1,47 @@
+{%- comment -%} Unto: "What's in the tin". A plain spec list, set like the brand's delivery note. {%- endcomment -%}
+<div class="u-block u-combo-{{ section.settings.combo }} u-facts">
+  <div class="u-wrap u-stack u-facts__inner">
+    {%- if section.settings.label != blank -%}<p class="u-label">{{ section.settings.label | escape }}</p>{%- endif -%}
+    <dl class="u-facts__list">
+      {%- for block in section.blocks -%}
+        <div class="u-facts__row" {{ block.shopify_attributes }}>
+          <dt>{{ block.settings.label | escape }}</dt>
+          <dd>{{ block.settings.value | escape }}</dd>
+        </div>
+      {%- endfor -%}
+    </dl>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Unto facts",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "select", "id": "combo", "label": "Colours", "default": "paper", "options": [
+        { "value": "neon", "label": "Neon oil + green" },
+        { "value": "green", "label": "Green + white" },
+        { "value": "olive-red", "label": "Olive red + leaf" },
+        { "value": "sky", "label": "Sky + green" },
+        { "value": "sunflower", "label": "Sunflower + earth" },
+        { "value": "sand", "label": "Sand + green" },
+        { "value": "heat", "label": "Heat + olive red" },
+        { "value": "leaf", "label": "Leaf + olive red" },
+        { "value": "paper", "label": "Paper + green" }
+      ] },
+    { "type": "text", "id": "label", "label": "Label", "default": "What's in the tin:" }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Harvest" },
+        { "type": "text", "id": "value", "label": "Value", "default": "Autumn 2026" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Unto facts" }]
+}
+{% endschema %}

@@ -1,36 +1,44 @@
 {%- comment -%}
-  Unto 2026 hero. Phones: full-height tall image with text over the bottom.
-  Desktop: image beside text. Images are theme assets (assets/*.jpg).
+  Unto hero. A colour block with a small label, giant Caslon Italian words
+  (one line per row of the Heading setting), one image and one button.
 {%- endcomment -%}
 {%- liquid
-  assign m = section.settings.mobile_image | default: 'unto-gift-table-9x16.jpg'
-  assign d = section.settings.desktop_image | default: 'unto-gift-table-4x5.jpg'
+  assign lines = section.settings.heading | newline_to_br | split: '<br />'
+  assign can = settings.unto_can
+  assign link = section.settings.button_link
+  if link == blank and can != blank
+    assign link = can.url
+  endif
 -%}
-<div class="unto-hero">
-  <picture class="unto-hero__media">
-    <source
-      media="(min-width: 750px)"
-      srcset="{{ d | asset_img_url: '720x' }} 720w, {{ d | asset_img_url: '1080x' }} 1080w"
-      sizes="50vw"
-    >
-    <img
-      src="{{ m | asset_img_url: '750x' }}"
-      srcset="{{ m | asset_img_url: '540x' }} 540w, {{ m | asset_img_url: '750x' }} 750w, {{ m | asset_img_url: '1080x' }} 1080w"
-      sizes="100vw"
-      width="1080"
-      height="1920"
-      alt="{{ section.settings.alt | escape }}"
-      fetchpriority="high"
-      loading="eager"
-    >
-  </picture>
-  <div class="unto-hero__content">
-    {%- if section.settings.eyebrow != blank -%}<p class="unto-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-    <h1 class="unto-hero__heading">{{ section.settings.heading | escape }}</h1>
-    {%- if section.settings.text != blank -%}<p class="unto-hero__text">{{ section.settings.text | escape }}</p>{%- endif -%}
-    {%- if section.settings.button_label != blank -%}
-      <a class="button button--primary unto-hero__btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
+<div class="u-block u-combo-{{ section.settings.combo }} u-hero">
+  <div class="u-wrap u-hero__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="u-label u-hero__label">{{ section.settings.eyebrow | escape }}</p>
     {%- endif -%}
+    <h1 class="u-hero__words" aria-label="{{ section.settings.heading | newline_to_br | replace: '<br />', ' ' | escape }}">
+      {%- for line in lines -%}
+        {%- assign text = line | strip -%}
+        {%- if text != blank -%}
+          <span class="u-display u-fit" style="--n: {{ text | size }};" data-max="260" aria-hidden="true">{{ text | escape }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </h1>
+    <picture class="u-hero__media">
+      {%- if section.settings.desktop_asset != blank -%}
+        <source media="(min-width: 750px)" srcset="{{ section.settings.desktop_asset | asset_img_url: '720x' }} 720w, {{ section.settings.desktop_asset | asset_img_url: '1200x' }} 1200w" sizes="45vw">
+      {%- endif -%}
+      {%- render 'unto-img', image: section.settings.image, asset: section.settings.mobile_asset, alt: section.settings.alt, sizes: '100vw', loading: 'eager', position: section.settings.focus -%}
+    </picture>
+    {%- if section.settings.button_label != blank -%}
+      <a class="u-btn u-hero__cta" href="{{ link }}">
+        {{ section.settings.button_label | escape }}{% if section.settings.show_price and can != blank %} · {{ can.price | money }}{% endif %}
+      </a>
+    {%- endif -%}
+    <div class="u-hero__copy">
+      {%- if section.settings.text != blank -%}<p class="u-statement">{{ section.settings.text | escape }}</p>{%- endif -%}
+      <p class="u-small">{{ settings.unto_cutoff_label | escape }}</p>
+      <p class="u-small u-countdown" data-unto-countdown="{{ settings.unto_cutoff_date | escape }}"></p>
+    </div>
   </div>
 </div>
 
@@ -40,14 +48,28 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "mobile_image", "label": "Phone image (theme asset file name)", "default": "unto-gift-table-9x16.jpg" },
-    { "type": "text", "id": "desktop_image", "label": "Desktop image (theme asset file name)", "default": "unto-gift-table-4x5.jpg" },
-    { "type": "text", "id": "alt", "label": "Image description", "default": "An UNTO olive oil tin on a candlelit Christmas table with bread and clementines" },
-    { "type": "text", "id": "eyebrow", "label": "Small line above heading", "default": "New harvest 2026" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Tuscan olive oil, made for giving" },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the can" },
-    { "type": "url", "id": "button_link", "label": "Button link" }
+    { "type": "select", "id": "combo", "label": "Colours", "default": "neon", "options": [
+        { "value": "neon", "label": "Neon oil + green" },
+        { "value": "green", "label": "Green + white" },
+        { "value": "olive-red", "label": "Olive red + leaf" },
+        { "value": "sky", "label": "Sky + green" },
+        { "value": "sunflower", "label": "Sunflower + earth" },
+        { "value": "sand", "label": "Sand + green" },
+        { "value": "heat", "label": "Heat + olive red" },
+        { "value": "leaf", "label": "Leaf + olive red" },
+        { "value": "paper", "label": "Paper + green" }
+      ] },
+    { "type": "text", "id": "eyebrow", "label": "Label", "default": "New harvest 2026:" },
+    { "type": "textarea", "id": "heading", "label": "Big words (one line per row, keep each short)", "default": "Olio\nnuovo" },
+    { "type": "textarea", "id": "text", "label": "Statement", "default": "This season's Tuscan olive oil, in a tin made for giving." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the tin" },
+    { "type": "checkbox", "id": "show_price", "label": "Show the tin's price in the button", "default": true },
+    { "type": "url", "id": "button_link", "label": "Button link (defaults to the tin)" },
+    { "type": "image_picker", "id": "image", "label": "Image (overrides the theme-asset images)" },
+    { "type": "text", "id": "mobile_asset", "label": "Phone image (theme asset file name)", "default": "unto-gift-table-9x16.jpg" },
+    { "type": "text", "id": "desktop_asset", "label": "Desktop image (theme asset file name)", "default": "unto-xmas-pour-dinner.jpg" },
+    { "type": "text", "id": "focus", "label": "Image focus (CSS object-position)", "default": "center 60%" },
+    { "type": "text", "id": "alt", "label": "Image description", "default": "An UNTO olive oil tin on a Christmas table" }
   ],
   "presets": [{ "name": "Unto hero" }]
 }

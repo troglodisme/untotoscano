@@ -1,0 +1,25 @@
+{%- comment -%}
+  Renders a picked image, or a theme-asset image when no image is picked.
+  Params: image, asset, alt, sizes, class, loading, position
+{%- endcomment -%}
+{%- liquid
+  assign l = loading | default: 'lazy'
+  assign s = sizes | default: '100vw'
+-%}
+{%- if image != blank -%}
+  <img
+    src="{{ image | image_url: width: 900 }}"
+    srcset="{{ image | image_url: width: 540 }} 540w, {{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1400 }} 1400w"
+    sizes="{{ s }}" width="{{ image.width }}" height="{{ image.height }}"
+    alt="{{ alt | default: image.alt | escape }}" loading="{{ l }}" class="{{ class }}"
+    {% if position != blank %}style="object-position: {{ position }};"{% endif %}
+  >
+{%- elsif asset != blank -%}
+  <img
+    src="{{ asset | asset_img_url: '900x' }}"
+    srcset="{{ asset | asset_img_url: '540x' }} 540w, {{ asset | asset_img_url: '900x' }} 900w, {{ asset | asset_img_url: '1400x' }} 1400w"
+    sizes="{{ s }}" width="900" height="1125"
+    alt="{{ alt | escape }}" loading="{{ l }}" class="{{ class }}"
+    {% if position != blank %}style="object-position: {{ position }};"{% endif %}
+  >
+{%- endif -%}

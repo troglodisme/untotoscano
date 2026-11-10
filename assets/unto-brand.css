@@ -1,0 +1,245 @@
+/* ==========================================================================
+   UNTO brand system for the web, 2026.
+   Built from the Studio Bergini identity manual (Jan 2022):
+   - block colours, never more than 2 colours + white together
+   - Caslon Italian: always very big, caps at 0.8 leading
+   - MT Grotesque Bold for everything else, tight tracking
+   - images that are not full bleed get rounded corners
+   - small "label:" lines above content ("Updates from the fields:")
+   ========================================================================== */
+
+:root {
+  --u-green: #477258;
+  --u-orange: #ff6c2f;
+  --u-yellow: #ffed00;
+  --u-sunflower: #ffca2d;
+  --u-heat: #ff9f37;
+  --u-rust: #bf5b42;
+  --u-olive-red: #7f4d5a;
+  --u-earth: #714931;
+  --u-sand: #d6c59c;
+  --u-khaki: #c1af5d;
+  --u-neon: #d9e100;
+  --u-leaf: #9ebf71;
+  --u-sky: #cdd5f6;
+  --u-paper: #f4f4f4;
+  --u-display: 'Caslon Italian One', 'Caslon Italian Two', 'Caslon Italian Mac One', 'Caslon Italian Mac Two', Georgia, serif;
+  --u-body: monotype-grotesque, 'Helvetica Neue', Arial, sans-serif;
+  --u-radius: clamp(1.6rem, 3.7vw, 3.6rem);
+  --u-gutter: clamp(1.6rem, 4vw, 5rem);
+}
+
+/* ---------- Colour blocks ---------- */
+.u-block {
+  --u-bg: var(--u-paper);
+  --u-fg: var(--u-green);
+  --u-accent: var(--u-orange);
+  --u-btn-bg: var(--u-green);
+  --u-btn-fg: #fff;
+  position: relative;
+  background: var(--u-bg);
+  color: var(--u-fg);
+  padding-block: clamp(4.4rem, 8vw, 9.6rem);
+  overflow: hidden;
+}
+.u-combo-neon { --u-bg: var(--u-neon); --u-fg: var(--u-green); --u-accent: #fff; --u-btn-bg: var(--u-green); --u-btn-fg: #fff; }
+.u-combo-green { --u-bg: var(--u-green); --u-fg: #fff; --u-accent: var(--u-neon); --u-btn-bg: var(--u-neon); --u-btn-fg: var(--u-green); }
+.u-combo-olive-red { --u-bg: var(--u-olive-red); --u-fg: #fff; --u-accent: var(--u-leaf); --u-btn-bg: var(--u-leaf); --u-btn-fg: var(--u-olive-red); }
+.u-combo-sky { --u-bg: var(--u-sky); --u-fg: var(--u-green); --u-accent: #fff; --u-btn-bg: var(--u-green); --u-btn-fg: #fff; }
+.u-combo-sunflower { --u-bg: var(--u-sunflower); --u-fg: var(--u-earth); --u-accent: #fff; --u-btn-bg: var(--u-earth); --u-btn-fg: #fff; }
+.u-combo-sand { --u-bg: var(--u-sand); --u-fg: var(--u-green); --u-accent: #fff; --u-btn-bg: var(--u-green); --u-btn-fg: #fff; }
+.u-combo-heat { --u-bg: var(--u-heat); --u-fg: var(--u-olive-red); --u-accent: #fff; --u-btn-bg: var(--u-olive-red); --u-btn-fg: #fff; }
+.u-combo-leaf { --u-bg: var(--u-leaf); --u-fg: var(--u-olive-red); --u-accent: #fff; --u-btn-bg: var(--u-olive-red); --u-btn-fg: #fff; }
+.u-combo-paper { --u-bg: var(--u-paper); --u-fg: var(--u-green); --u-accent: var(--u-orange); --u-btn-bg: var(--u-green); --u-btn-fg: #fff; }
+
+.u-wrap { width: 100%; max-width: 128rem; margin-inline: auto; padding-inline: var(--u-gutter); }
+.u-stack { display: flex; flex-direction: column; gap: clamp(2rem, 3vw, 3.6rem); }
+.u-center { text-align: center; align-items: center; }
+
+/* ---------- Type ---------- */
+.u-block p, .u-block h1, .u-block h2, .u-block h3, .u-block li, .u-block summary, .u-block dt, .u-block dd { color: inherit; }
+.u-label { margin: 0; font: 700 1.6rem/1.15 var(--u-body); letter-spacing: -0.01em; }
+.u-display {
+  display: block;
+  margin: 0;
+  font-family: var(--u-display);
+  font-weight: 400;
+  line-height: 0.8;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: inherit;
+}
+/* "As big as it can fit": a CSS guess from the character count, refined by unto-brand.js */
+.u-fit { font-size: calc((100vw - 2 * var(--u-gutter)) / (var(--n, 5) * 0.8)); }
+.u-accent { color: var(--u-accent); }
+.u-lower {
+  margin: 0;
+  font-family: var(--u-display);
+  font-weight: 400;
+  font-size: clamp(3.6rem, 8.2vw, 9.6rem);
+  line-height: 1;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+.u-statement { margin: 0; font: 700 clamp(2.4rem, 3.6vw, 4.6rem)/1.1 var(--u-body); letter-spacing: -0.025em; text-wrap: balance; }
+.u-copy { margin: 0; font: 700 1.9rem/1.25 var(--u-body); letter-spacing: -0.015em; max-width: 34em; }
+.u-small { margin: 0; font: 700 1.5rem/1.2 var(--u-body); letter-spacing: -0.01em; }
+
+/* ---------- Buttons, images ---------- */
+.u-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem;
+  min-height: 5.6rem; padding: 0 2.8rem;
+  border: 0; border-radius: 99rem;
+  background: var(--u-btn-bg); color: var(--u-btn-fg) !important;
+  font: 700 1.8rem/1 var(--u-body); letter-spacing: -0.01em; text-decoration: none;
+  cursor: pointer; transition: transform 0.15s ease;
+}
+.u-btn:hover { transform: translateY(-0.2rem); }
+.u-btn:focus-visible, .u-link:focus-visible { outline: 0.3rem solid currentColor; outline-offset: 0.3rem; }
+.u-link { font: 700 1.8rem/1.2 var(--u-body); letter-spacing: -0.01em; color: inherit; text-underline-offset: 0.35rem; text-decoration-thickness: 0.2rem; }
+.u-img { display: block; width: 100%; height: auto; object-fit: cover; border-radius: var(--u-radius); }
+
+/* ---------- Ticker (announcement bar) ---------- */
+.u-ticker { background: var(--u-green); color: #fff; overflow: hidden; }
+.u-ticker__link { display: block; color: inherit; text-decoration: none; }
+.u-ticker__track { display: flex; width: max-content; animation: u-ticker 38s linear infinite; }
+.u-ticker:hover .u-ticker__track { animation-play-state: paused; }
+.u-ticker__group { display: flex; flex: none; }
+.u-ticker__item { display: flex; align-items: center; gap: 1.6rem; padding: 0.9rem 0 0.9rem 1.6rem; font: 700 1.4rem/1.1 var(--u-body); letter-spacing: -0.01em; white-space: nowrap; }
+.u-ticker__item::after { content: ''; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--u-neon); }
+@keyframes u-ticker { to { transform: translateX(-25%); } }
+
+/* ---------- Hero ---------- */
+.u-hero { padding-block: 1.8rem 3.2rem; }
+.u-hero__inner { display: grid; gap: 1.4rem; grid-template-areas: 'label' 'words' 'media' 'copy'; }
+.u-hero__label { grid-area: label; text-align: center; }
+.u-hero__words { grid-area: words; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding-top: 0.4rem; }
+.u-hero__media { grid-area: media; }
+.u-hero__media img { display: block; width: 100%; height: clamp(24rem, calc(100svh - 37rem), 46rem); object-fit: cover; border-radius: var(--u-radius); }
+.u-hero__cta { grid-area: media; align-self: end; justify-self: center; width: calc(100% - 3.2rem); margin-bottom: 1.6rem; z-index: 1; }
+.u-hero__copy { grid-area: copy; display: grid; gap: 1rem; justify-items: center; text-align: center; padding-top: 0.6rem; }
+
+/* ---------- Facts ("What's in the tin") ---------- */
+.u-facts__list { margin: 0; padding: 0; border-top: 0.3rem solid currentColor; }
+.u-facts__row { display: grid; grid-template-columns: minmax(9rem, 0.4fr) minmax(0, 1fr); gap: 1.6rem; align-items: baseline; padding: 1.4rem 0; border-bottom: 0.2rem solid currentColor; }
+.u-facts__row dt { margin: 0; font: 700 1.5rem/1.2 var(--u-body); letter-spacing: 0.02em; text-transform: uppercase; }
+.u-facts__row dd { margin: 0; font: 700 clamp(2rem, 2.6vw, 3rem)/1.1 var(--u-body); letter-spacing: -0.025em; }
+
+/* ---------- Why a tin ---------- */
+.u-why__list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(3.2rem, 5vw, 5.6rem); }
+.u-why__item { display: grid; gap: 1.2rem; justify-items: center; text-align: center; }
+
+/* ---------- Ways to use (photo strip) ---------- */
+.u-uses__list { list-style: none; margin: 0; padding: 0 var(--u-gutter) 0.8rem; display: flex; gap: 1.2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.u-uses__list::-webkit-scrollbar { display: none; }
+.u-uses__item { flex: 0 0 76%; scroll-snap-align: center; display: grid; gap: 1rem; min-width: 0; }
+.u-uses__item img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--u-radius); }
+.u-uses__cap { margin: 0; font: 700 1.9rem/1.15 var(--u-body); letter-spacing: -0.02em; text-align: center; }
+
+/* ---------- Definition ---------- */
+.u-def__eyes { position: relative; width: min(46rem, 62%); aspect-ratio: 520 / 291; }
+.u-def__eyes span { position: absolute; inset: 0; background: currentColor; -webkit-mask: var(--u-mask) center / contain no-repeat; mask: var(--u-mask) center / contain no-repeat; }
+.u-def__pupils { transition: transform 0.25s ease-out; will-change: transform; }
+.u-wordmark { display: block; width: 100%; max-width: 92rem; aspect-ratio: 717 / 173; background: currentColor; -webkit-mask: var(--u-mask) center / contain no-repeat; mask: var(--u-mask) center / contain no-repeat; }
+.u-def__entry { display: grid; gap: 0.8rem; justify-items: center; text-align: center; }
+.u-def__list { margin: 0; padding: 0; list-style: none; counter-reset: def; display: grid; gap: 0.6rem; }
+.u-def__list li { counter-increment: def; font: 700 clamp(2.2rem, 3vw, 3.6rem)/1.1 var(--u-body); letter-spacing: -0.025em; }
+.u-def__list li::before { content: counter(def) '. '; }
+
+/* ---------- Story ---------- */
+.u-story__grid { display: grid; gap: clamp(2.4rem, 4vw, 5rem); }
+.u-story__imgs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.u-story__imgs img { aspect-ratio: 4 / 5; }
+.u-story__text { display: grid; gap: 2rem; justify-items: start; }
+
+/* ---------- Last orders ---------- */
+.u-last__words { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin: 0; }
+.u-countdown:empty { display: none; }
+
+/* ---------- FAQ ---------- */
+.u-faq__list { border-top: 0.3rem solid currentColor; }
+.u-faq__item { border-bottom: 0.2rem solid currentColor; }
+.u-faq__item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1.6rem; padding: 1.8rem 0; font: 700 clamp(2rem, 2.4vw, 2.8rem)/1.1 var(--u-body); letter-spacing: -0.025em; }
+.u-faq__item summary::-webkit-details-marker { display: none; }
+.u-faq__item summary::after { content: '+'; flex: none; font: 400 3.2rem/0.6 var(--u-display); }
+.u-faq__item[open] summary::after { content: '\2013'; }
+.u-faq__a { padding: 0 0 2rem; }
+.u-faq__a p { margin: 0 0 1rem; font: 700 1.8rem/1.3 var(--u-body); letter-spacing: -0.015em; max-width: 36em; }
+.u-faq__a a { color: inherit; }
+
+/* ---------- Product page pieces ---------- */
+.u-chips { border: 0; margin: 1.6rem 0; padding: 0; display: grid; gap: 0.8rem; min-width: 0; }
+.u-chips legend { padding: 0; margin-bottom: 0.8rem; font: 700 1.5rem/1.2 var(--u-body); letter-spacing: -0.01em; }
+.u-chip { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1.2rem; padding: 1.3rem 1.6rem; border: 0.2rem solid rgba(71, 114, 88, 0.35); border-radius: 1.8rem; cursor: pointer; background: #fff; color: var(--u-green); }
+.u-chip input { position: absolute; opacity: 0; pointer-events: none; }
+.u-chip:has(input:checked) { border-color: var(--u-green); background: var(--u-neon); }
+.u-chip:has(input:focus-visible) { outline: 0.3rem solid var(--u-green); outline-offset: 0.2rem; }
+.u-chip__n { font: 400 3rem/0.8 var(--u-display); min-width: 1.2em; text-align: center; }
+.u-chip__t { display: grid; gap: 0.2rem; min-width: 0; }
+.u-chip__t b { font: 700 1.7rem/1.1 var(--u-body); letter-spacing: -0.02em; }
+.u-chip__t span { font: 700 1.3rem/1.15 var(--u-body); letter-spacing: -0.01em; opacity: 0.85; }
+.u-chip__p { font: 700 1.7rem/1 var(--u-body); letter-spacing: -0.02em; text-align: right; display: grid; gap: 0.3rem; justify-items: end; }
+.u-chip__badge { padding: 0.3rem 0.7rem; border-radius: 99rem; background: var(--u-green); color: #fff; font-size: 1.2rem; }
+.u-chips + .product-form__quantity { display: none; }
+
+.u-trust { list-style: none; margin: 1.6rem 0; padding: 0; display: grid; gap: 0.8rem; }
+.u-trust li { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); gap: 1rem; align-items: start; font: 700 1.5rem/1.25 var(--u-body); letter-spacing: -0.01em; color: var(--u-green); }
+.u-trust li::before { content: ''; width: 1rem; height: 1rem; margin-top: 0.45rem; border-radius: 50%; background: var(--u-orange); }
+.u-use-line { margin: 0.4rem 0 0; font: 700 1.8rem/1.2 var(--u-body); letter-spacing: -0.02em; color: var(--u-green); }
+
+.unto-notice { margin: 1.6rem 0; padding: 1.6rem; border-radius: 1.8rem; background: var(--u-neon); color: var(--u-green); }
+.unto-notice p { margin: 0 0 0.8rem; font: 700 1.5rem/1.3 var(--u-body); letter-spacing: -0.01em; }
+.unto-notice .unto-notice__title { font-size: 1.8rem; letter-spacing: -0.02em; }
+.unto-notice__link { color: inherit; font: 700 1.6rem/1.2 var(--u-body); text-underline-offset: 0.3rem; }
+
+/* Sticky buy bar (phones only; shown by sticky-buy-bar.liquid) */
+.unto-buybar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; align-items: center; gap: 1.2rem; padding: 1rem 1.6rem calc(1rem + env(safe-area-inset-bottom, 0px)); background: var(--u-neon); color: var(--u-green); box-shadow: 0 -0.4rem 1.6rem rgba(0, 0, 0, 0.12); }
+.unto-buybar[hidden] { display: none; }
+.unto-buybar__info { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.unto-buybar__title { font: 700 1.5rem/1.15 var(--u-body); letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.unto-buybar__price { font: 700 1.3rem/1.2 var(--u-body); }
+.unto-buybar__btn.button { min-height: 4.8rem; padding: 0 2.2rem; flex: 0 0 auto; border-radius: 99rem; background: var(--u-green); color: #fff; font: 700 1.6rem/1 var(--u-body); }
+.unto-buybar__btn.button::before, .unto-buybar__btn.button::after { display: none; }
+body.unto-has-buybar { padding-bottom: 7.6rem; }
+
+/* Product page: brand type on the standard Dawn product block */
+.product__info-container .product__title h1 { font: 700 clamp(3rem, 4vw, 4.4rem)/1.02 var(--u-body); letter-spacing: -0.03em; }
+.product__info-container .price { font: 700 2.2rem/1 var(--u-body); letter-spacing: -0.02em; }
+.product__description.rte p { font-size: 1.7rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.015em; }
+.product-form__submit.button { min-height: 5.6rem; border-radius: 99rem; background: var(--u-green); color: #fff; font: 700 1.8rem/1 var(--u-body); letter-spacing: -0.01em; }
+.product-form__submit.button::before, .product-form__submit.button::after { border-radius: 99rem; box-shadow: none; }
+.product__info-container .shopify-payment-button__button { border-radius: 99rem; min-height: 5.2rem; overflow: hidden; }
+.product__media-wrapper .product__media { border-radius: var(--u-radius); overflow: hidden; }
+
+/* ---------- Phones ---------- */
+@media screen and (max-width: 749px) {
+  .header { padding-top: 0.4rem; padding-bottom: 0.4rem; }
+  .header__heading-logo { max-width: 15rem; height: auto; }
+  .u-story__text { justify-items: center; text-align: center; }
+}
+
+/* ---------- Tablet and up ---------- */
+@media screen and (min-width: 750px) {
+  .u-label { font-size: 1.8rem; }
+  .u-copy { font-size: 2.1rem; }
+  .u-hero { padding-block: 4rem 6rem; }
+  .u-hero__inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); grid-template-areas: 'label media' 'words media' 'copy media' 'cta media' '. media'; grid-template-rows: auto auto auto auto 1fr; column-gap: clamp(3rem, 5vw, 7rem); row-gap: 2rem; align-items: start; }
+  .u-hero__label { text-align: left; }
+  .u-hero__words { align-items: flex-start; gap: 0.8rem; }
+  .u-hero__copy { justify-items: start; text-align: left; }
+  .u-hero__cta { grid-area: cta; justify-self: start; width: auto; margin: 0; }
+  .u-hero__media img { height: auto; aspect-ratio: 4 / 5; }
+  .u-why__list { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .u-uses__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; max-width: 128rem; margin-inline: auto; }
+  .u-story__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+  .u-facts__inner, .u-faq__inner { max-width: 96rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-ticker__track { animation: none; }
+  .u-btn, .u-def__pupils { transition: none; }
+}
+
+/* A one-option picker ("Size: 250ml") says nothing, so hide it */
+variant-radios fieldset.product-form__input:not(:has(label + input)) { display: none; }

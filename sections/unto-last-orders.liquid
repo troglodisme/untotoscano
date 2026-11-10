@@ -1,0 +1,58 @@
+{%- comment -%} Unto: the Christmas cut-off, set like the brand's Stories template (one phrase, repeated). {%- endcomment -%}
+{%- liquid
+  assign lines = section.settings.words | newline_to_br | split: '<br />'
+  assign can = settings.unto_can
+  assign link = section.settings.button_link
+  if link == blank and can != blank
+    assign link = can.url
+  endif
+-%}
+<div class="u-block u-combo-{{ section.settings.combo }} u-last">
+  <div class="u-wrap u-stack u-center">
+    {%- if section.settings.label != blank -%}<p class="u-label">{{ section.settings.label | escape }}</p>{%- endif -%}
+    <h2 class="u-last__words" aria-label="{{ section.settings.words | newline_to_br | replace: '<br />', ' ' | escape }}">
+      {%- for i in (1..section.settings.repeat) -%}
+        {%- for line in lines -%}
+          {%- assign text = line | strip -%}
+          {%- if text != blank -%}
+            <span class="u-display u-fit" style="--n: {{ text | size }};" data-max="170" aria-hidden="true">{{ text | escape }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </h2>
+    <p class="u-statement">{{ section.settings.text | default: settings.unto_cutoff_label | escape }}</p>
+    <p class="u-copy u-countdown" data-unto-countdown="{{ settings.unto_cutoff_date | escape }}" data-after="{{ section.settings.after | escape }}"></p>
+    {%- if section.settings.button_label != blank -%}
+      <a class="u-btn" href="{{ link }}">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Unto last orders",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "select", "id": "combo", "label": "Colours", "default": "heat", "options": [
+        { "value": "neon", "label": "Neon oil + green" },
+        { "value": "green", "label": "Green + white" },
+        { "value": "olive-red", "label": "Olive red + leaf" },
+        { "value": "sky", "label": "Sky + green" },
+        { "value": "sunflower", "label": "Sunflower + earth" },
+        { "value": "sand", "label": "Sand + green" },
+        { "value": "heat", "label": "Heat + olive red" },
+        { "value": "leaf", "label": "Leaf + olive red" },
+        { "value": "paper", "label": "Paper + green" }
+      ] },
+    { "type": "text", "id": "label", "label": "Label", "default": "Wednesday 16 December:" },
+    { "type": "textarea", "id": "words", "label": "Big words (one line per row)", "default": "Last\norders" },
+    { "type": "range", "id": "repeat", "label": "Repeat", "min": 1, "max": 4, "step": 1, "default": 2 },
+    { "type": "textarea", "id": "text", "label": "Statement (defaults to the Christmas last order text)" },
+    { "type": "text", "id": "after", "label": "Text after the date has passed", "default": "Christmas orders have closed. New orders ship as normal." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the tin" },
+    { "type": "url", "id": "button_link", "label": "Button link (defaults to the tin)" }
+  ],
+  "presets": [{ "name": "Unto last orders" }]
+}
+{% endschema %}

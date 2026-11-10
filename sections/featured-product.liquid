@@ -135,6 +135,7 @@
                   </div>
                 {%- endif -%}
               {%- when 'quantity_selector' -%}
+                {%- render 'unto-qty-chips', product: product, section_id: section.id -%}
                 <div
                   class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
                   {{ block.shopify_attributes }}
@@ -351,7 +352,7 @@
                           >
                             <span>
                               {%- if product.selected_or_first_available_variant.available -%}
-                                {{ 'products.product.add_to_cart' | t }}
+                                {{ 'products.product.add_to_cart' | t }} · <span data-unto-total="{{ section.id }}">{{ product.selected_or_first_available_variant.price | money }}</span>
                               {%- else -%}
                                 {{ 'products.product.sold_out' | t }}
                               {%- endif -%}

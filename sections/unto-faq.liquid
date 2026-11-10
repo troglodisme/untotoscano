@@ -1,0 +1,47 @@
+{%- comment -%} Unto: short questions, short answers. {%- endcomment -%}
+<div class="u-block u-combo-{{ section.settings.combo }} u-faq">
+  <div class="u-wrap u-stack u-faq__inner">
+    {%- if section.settings.label != blank -%}<p class="u-label">{{ section.settings.label | escape }}</p>{%- endif -%}
+    <div class="u-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="u-faq__item" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.q | escape }}</summary>
+          <div class="u-faq__a">{{ block.settings.a }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Unto questions",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "select", "id": "combo", "label": "Colours", "default": "paper", "options": [
+        { "value": "neon", "label": "Neon oil + green" },
+        { "value": "green", "label": "Green + white" },
+        { "value": "olive-red", "label": "Olive red + leaf" },
+        { "value": "sky", "label": "Sky + green" },
+        { "value": "sunflower", "label": "Sunflower + earth" },
+        { "value": "sand", "label": "Sand + green" },
+        { "value": "heat", "label": "Heat + olive red" },
+        { "value": "leaf", "label": "Leaf + olive red" },
+        { "value": "paper", "label": "Paper + green" }
+      ] },
+    { "type": "text", "id": "label", "label": "Label", "default": "Something you should know:" }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "q", "label": "Question", "default": "When will it arrive?" },
+        { "type": "richtext", "id": "a", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Unto questions" }]
+}
+{% endschema %}

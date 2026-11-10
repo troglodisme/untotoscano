@@ -1,0 +1,50 @@
+{%- comment -%} Unto: the story in one statement, two photos and a link. {%- endcomment -%}
+<div class="u-block u-combo-{{ section.settings.combo }} u-story">
+  <div class="u-wrap u-story__grid">
+    <div class="u-story__imgs">
+      {%- render 'unto-img', image: section.settings.image_1, asset: section.settings.asset_1, alt: section.settings.alt_1, sizes: '(min-width: 750px) 25vw, 46vw', class: 'u-img' -%}
+      {%- render 'unto-img', image: section.settings.image_2, asset: section.settings.asset_2, alt: section.settings.alt_2, sizes: '(min-width: 750px) 25vw, 46vw', class: 'u-img' -%}
+    </div>
+    <div class="u-story__text">
+      {%- if section.settings.label != blank -%}<p class="u-label">{{ section.settings.label | escape }}</p>{%- endif -%}
+      <h2 class="u-lower">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.text != blank -%}<p class="u-copy">{{ section.settings.text | escape }}</p>{%- endif -%}
+      {%- if section.settings.link_label != blank -%}
+        <a class="u-link" href="{{ section.settings.link }}">{{ section.settings.link_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Unto story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "select", "id": "combo", "label": "Colours", "default": "green", "options": [
+        { "value": "neon", "label": "Neon oil + green" },
+        { "value": "green", "label": "Green + white" },
+        { "value": "olive-red", "label": "Olive red + leaf" },
+        { "value": "sky", "label": "Sky + green" },
+        { "value": "sunflower", "label": "Sunflower + earth" },
+        { "value": "sand", "label": "Sand + green" },
+        { "value": "heat", "label": "Heat + olive red" },
+        { "value": "leaf", "label": "Leaf + olive red" },
+        { "value": "paper", "label": "Paper + green" }
+      ] },
+    { "type": "text", "id": "label", "label": "Label", "default": "Updates from the fields:" },
+    { "type": "textarea", "id": "heading", "label": "Statement", "default": "We bring abandoned olive groves back to life." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Read our story" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "text", "id": "asset_1", "label": "Or theme asset 1" },
+    { "type": "text", "id": "alt_1", "label": "Image 1 description" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "text", "id": "asset_2", "label": "Or theme asset 2" },
+    { "type": "text", "id": "alt_2", "label": "Image 2 description" }
+  ],
+  "presets": [{ "name": "Unto story" }]
+}
+{% endschema %}
