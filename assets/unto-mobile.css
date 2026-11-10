@@ -76,3 +76,33 @@ body.unto-has-buybar { padding-bottom: 7.6rem; }
   .product-form__submit, .shopify-payment-button__button { min-height: 5rem; font-size: 1.6rem; }
   .product__info-container .product-form__input .form__label { font-size: 1.4rem; }
 }
+
+/* Unto hero */
+.unto-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 4rem; max-width: 120rem; margin: 0 auto; padding: 4rem 5rem; }
+.unto-hero__media img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 2.4rem; }
+.unto-hero__content { display: flex; flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+.unto-hero__eyebrow { margin: 0; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.12rem; text-transform: uppercase; }
+.unto-hero__heading {
+  margin: 0;
+  font-family: 'Caslon Italian One', 'Caslon Italian Two', 'Caslon Italian Mac One', 'Caslon Italian Mac Two', serif;
+  font-size: clamp(4rem, 5vw, 7.2rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.unto-hero__text { margin: 0; font-size: 1.8rem; line-height: 1.45; max-width: 44rem; }
+.unto-hero__btn { min-height: 5.2rem; padding: 0 3.2rem; font-size: 1.7rem; }
+
+@media screen and (max-width: 749px) {
+  .unto-hero { display: block; padding: 0; max-width: none; }
+  .unto-hero__media img { aspect-ratio: auto; height: min(calc(100svh - 9.6rem), 177.8vw); border-radius: 0; }
+  .unto-hero__content {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 6rem 2rem calc(2.4rem + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(to top, rgba(14, 24, 18, 0.92), rgba(14, 24, 18, 0.7) 55%, transparent);
+    color: #fff; gap: 1rem;
+  }
+  .unto-hero__eyebrow, .unto-hero__text { color: #fff; }
+  .unto-hero__heading { font-size: 3.4rem; color: #dbff00; }
+  .unto-hero__text { font-size: 1.5rem; line-height: 1.4; }
+  .unto-hero__btn { width: 100%; justify-content: center; background: #dbff00; color: #2f4f3c; }
+}

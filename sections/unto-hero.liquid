@@ -1,0 +1,54 @@
+{%- comment -%}
+  Unto 2026 hero. Phones: full-height tall image with text over the bottom.
+  Desktop: image beside text. Images are theme assets (assets/*.jpg).
+{%- endcomment -%}
+{%- liquid
+  assign m = section.settings.mobile_image | default: 'unto-gift-table-9x16.jpg'
+  assign d = section.settings.desktop_image | default: 'unto-gift-table-4x5.jpg'
+-%}
+<div class="unto-hero">
+  <picture class="unto-hero__media">
+    <source
+      media="(min-width: 750px)"
+      srcset="{{ d | asset_img_url: '720x' }} 720w, {{ d | asset_img_url: '1080x' }} 1080w"
+      sizes="50vw"
+    >
+    <img
+      src="{{ m | asset_img_url: '750x' }}"
+      srcset="{{ m | asset_img_url: '540x' }} 540w, {{ m | asset_img_url: '750x' }} 750w, {{ m | asset_img_url: '1080x' }} 1080w"
+      sizes="100vw"
+      width="1080"
+      height="1920"
+      alt="{{ section.settings.alt | escape }}"
+      fetchpriority="high"
+      loading="eager"
+    >
+  </picture>
+  <div class="unto-hero__content">
+    {%- if section.settings.eyebrow != blank -%}<p class="unto-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+    <h1 class="unto-hero__heading">{{ section.settings.heading | escape }}</h1>
+    {%- if section.settings.text != blank -%}<p class="unto-hero__text">{{ section.settings.text | escape }}</p>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="button button--primary unto-hero__btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Unto hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "mobile_image", "label": "Phone image (theme asset file name)", "default": "unto-gift-table-9x16.jpg" },
+    { "type": "text", "id": "desktop_image", "label": "Desktop image (theme asset file name)", "default": "unto-gift-table-4x5.jpg" },
+    { "type": "text", "id": "alt", "label": "Image description", "default": "An UNTO olive oil tin on a candlelit Christmas table with bread and clementines" },
+    { "type": "text", "id": "eyebrow", "label": "Small line above heading", "default": "New harvest 2026" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Tuscan olive oil, made for giving" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the can" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Unto hero" }]
+}
+{% endschema %}

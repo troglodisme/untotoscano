@@ -144,7 +144,9 @@
     {% for block in section.blocks %}
       <div class="section-card">
         <div class="image-container">
-          {% if block.settings.block_image_picker != blank %}
+          {% if block.settings.asset_image != blank %}
+            <img src="{{ block.settings.asset_image | asset_img_url: '1080x' }}" srcset="{{ block.settings.asset_image | asset_img_url: '540x' }} 540w, {{ block.settings.asset_image | asset_img_url: '1080x' }} 1080w" sizes="(min-width: 750px) 70rem, 90vw" width="1080" height="1350" loading="lazy" alt="{{ block.settings.asset_alt | escape }}" />
+          {% elsif block.settings.block_image_picker != blank %}
             <img src="{{ block.settings.block_image_picker | img_url: 'master' }}" />
           {% else %}
             <img src="{{ block.settings.section_product.featured_image | img_url: 'master' }}" />
@@ -179,6 +181,17 @@
           "type": "image_picker",
           "id": "block_image_picker",
           "label": "Select image"
+        },
+        {
+          "type": "text",
+          "id": "asset_image",
+          "label": "Theme asset image (file name)",
+          "info": "Used instead of the picked image, e.g. unto-can-lime-4x5.jpg"
+        },
+        {
+          "type": "text",
+          "id": "asset_alt",
+          "label": "Theme asset image description"
         },
         {
           "type": "text",
