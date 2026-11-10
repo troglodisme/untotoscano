@@ -1244,3 +1244,10 @@ a.product__text {
   margin-left: 1.2rem;
   flex-shrink: 0;
 }
+
+/* Unto: readable product descriptions (the global .rte p rule is 20px bold for story pages) */
+.product__description.rte p {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
