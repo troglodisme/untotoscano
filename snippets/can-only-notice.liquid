@@ -1,0 +1,16 @@
+{%- comment -%}
+  Unto 2026: this harvest is sold in the 250ml can only.
+  Shown on the (sold out) glass bottle page, pointing people to the can.
+  Change can_handle here if the can product's handle changes.
+{%- endcomment -%}
+{%- liquid
+  assign can_handle = 'unto-2022-monocultivar-leccio-del-corno'
+  assign bottle_handle = 'tuscan-extra-virgin-olive-oil-bottle'
+-%}
+{%- if product.handle == bottle_handle -%}
+  <div class="unto-notice">
+    <p class="unto-notice__title">This harvest comes in cans only</p>
+    <p>For 2026 we've moved to a 250ml tin. It's lighter to ship, keeps the light out so the oil stays fresh, and the tin is 100% recyclable.</p>
+    <a class="unto-notice__link" href="{{ routes.root_url | append: 'products/' | replace: '//', '/' }}{{ can_handle }}">Shop the 250ml can &rarr;</a>
+  </div>
+{%- endif -%}

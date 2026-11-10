@@ -1,0 +1,78 @@
+/* Unto 2026: mobile-first tweaks. Most visitors arrive from Instagram on a phone. */
+
+/* Can-only notice on the bottle page */
+.unto-notice {
+  margin: 1.6rem 0;
+  padding: 1.6rem;
+  border-radius: 1.4rem;
+  background: #dbff00;
+  color: #2f4f3c;
+}
+.unto-notice p { margin: 0 0 0.8rem; font-size: 1.5rem; line-height: 1.45; font-weight: 400; }
+.unto-notice .unto-notice__title { font-weight: 700; font-size: 1.7rem; }
+.unto-notice__link { color: inherit; font-weight: 700; font-size: 1.5rem; text-underline-offset: 0.3rem; }
+
+/* Why a can */
+.unto-why { padding-block: 4.8rem; }
+.unto-why__inner { display: flex; flex-direction: column; gap: 1.6rem; }
+.unto-why__heading {
+  margin: 0;
+  font-family: 'Caslon Italian One', 'Caslon Italian Two', 'Caslon Italian Mac One', 'Caslon Italian Mac Two', serif;
+  font-size: clamp(3.2rem, 7vw, 6rem);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+.unto-why__intro { margin: 0; text-align: center; font-size: 1.6rem; }
+.unto-why__list {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+.unto-why__item {
+  padding: 2rem;
+  border: 0.2rem solid rgba(var(--color-foreground), 0.15);
+  border-radius: 1.4rem;
+}
+.unto-why__title { margin: 0 0 0.6rem; font-weight: 700; font-size: 1.8rem; }
+.unto-why__text { margin: 0; font-size: 1.5rem; line-height: 1.5; }
+
+/* Sticky buy bar (phones only; shown by sticky-buy-bar.liquid) */
+.unto-buybar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.6rem calc(1rem + env(safe-area-inset-bottom, 0px));
+  background: rgb(var(--color-background));
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  box-shadow: 0 -0.4rem 1.6rem rgba(0, 0, 0, 0.08);
+}
+.unto-buybar[hidden] { display: none; }
+.unto-buybar__info { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.unto-buybar__title { font-weight: 700; font-size: 1.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.unto-buybar__price { font-size: 1.3rem; opacity: 0.8; }
+.unto-buybar__btn { min-height: 4.6rem; padding: 0 2rem; flex: 0 0 auto; }
+body.unto-has-buybar { padding-bottom: 7.6rem; }
+
+@media screen and (max-width: 749px) {
+  /* Shorter header so the product shows sooner */
+  .header { padding-top: 0.4rem; padding-bottom: 0.4rem; }
+  .header__heading-logo { max-width: 15rem; height: auto; }
+  .announcement-bar__message { font-size: 1.2rem; padding: 0.8rem 1.2rem; letter-spacing: 0.04rem; }
+
+  .unto-why { padding-block: 3.6rem; }
+  .unto-why__list { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+  .unto-why__item { padding: 1.6rem; }
+
+  /* Bigger tap targets on product pages */
+  .product-form__submit, .shopify-payment-button__button { min-height: 5rem; font-size: 1.6rem; }
+  .product__info-container .product-form__input .form__label { font-size: 1.4rem; }
+}

@@ -1,0 +1,52 @@
+{%- comment -%}
+  Unto: bottom buy bar for phones (most visitors arrive from Instagram).
+  Appears once the main Add to cart button is off screen.
+  Params: product, product_form_id, section_id
+{%- endcomment -%}
+{%- liquid
+  assign can_handle = 'unto-2022-monocultivar-leccio-del-corno'
+  assign bottle_handle = 'tuscan-extra-virgin-olive-oil-bottle'
+  assign variant = product.selected_or_first_available_variant
+-%}
+<div class="unto-buybar" id="UntoBuyBar-{{ section_id }}" data-target="ProductInfo-{{ section_id }}" hidden>
+  <div class="unto-buybar__info">
+    <span class="unto-buybar__title">{{ product.title | escape }}</span>
+    <span class="unto-buybar__price">
+      {%- if product.available -%}
+        {{ variant.price | money }}{% if variant.title != 'Default Title' %} · {{ variant.title | escape }}{% endif %}
+      {%- else -%}
+        {{ 'products.product.sold_out' | t }}
+      {%- endif -%}
+    </span>
+  </div>
+  {%- if product.available -%}
+    <button type="submit" form="{{ product_form_id }}" name="add" class="button button--primary unto-buybar__btn">
+      {{ 'products.product.add_to_cart' | t }}
+    </button>
+  {%- elsif product.handle == bottle_handle -%}
+    <a class="button button--primary unto-buybar__btn" href="{{ routes.root_url | append: 'products/' | replace: '//', '/' }}{{ can_handle }}">Shop the can</a>
+  {%- else -%}
+    <button type="button" class="button button--primary unto-buybar__btn" disabled>{{ 'products.product.sold_out' | t }}</button>
+  {%- endif -%}
+</div>
+<script>
+  (function () {
+    var bar = document.getElementById('UntoBuyBar-{{ section_id }}');
+    if (!bar || !('IntersectionObserver' in window)) return;
+    var form = document.getElementById('{{ product_form_id }}');
+    var anchor = (form && form.querySelector('.product-form__buttons')) || document.getElementById(bar.dataset.target);
+    if (!anchor) return;
+    var mq = window.matchMedia('(max-width: 749px)');
+    var anchorVisible = true;
+    function update() {
+      var show = mq.matches && !anchorVisible;
+      bar.hidden = !show;
+      document.body.classList.toggle('unto-has-buybar', show);
+    }
+    new IntersectionObserver(function (entries) {
+      anchorVisible = entries[0].isIntersecting;
+      update();
+    }).observe(anchor);
+    if (mq.addEventListener) mq.addEventListener('change', update);
+  })();
+</script>
