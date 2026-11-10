@@ -106,3 +106,28 @@ body.unto-has-buybar { padding-bottom: 7.6rem; }
   .unto-hero__text { font-size: 1.5rem; line-height: 1.4; }
   .unto-hero__btn { width: 100%; justify-content: center; background: #dbff00; color: #2f4f3c; }
 }
+
+/* Unto photo strip */
+.unto-gallery { padding-block: 4.8rem; }
+.unto-gallery__inner { display: flex; flex-direction: column; gap: 2.4rem; }
+.unto-gallery__heading {
+  margin: 0; text-align: center; text-transform: uppercase; line-height: 1;
+  font-family: 'Caslon Italian One', 'Caslon Italian Two', 'Caslon Italian Mac One', 'Caslon Italian Mac Two', serif;
+  font-size: clamp(3.2rem, 7vw, 6rem);
+}
+.unto-gallery__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.6rem; }
+.unto-gallery__item { display: flex; flex-direction: column; gap: 0.8rem; min-width: 0; }
+.unto-gallery__item img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 1.6rem; }
+.unto-gallery__caption { margin: 0; font-size: 1.4rem; line-height: 1.4; }
+
+@media screen and (max-width: 749px) {
+  .unto-gallery { padding-block: 3.6rem; }
+  .unto-gallery__inner { padding-left: 0; padding-right: 0; }
+  .unto-gallery__heading { padding-inline: 1.6rem; }
+  .unto-gallery__list {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.2rem;
+    padding: 0 1.6rem 0.8rem; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .unto-gallery__list::-webkit-scrollbar { display: none; }
+  .unto-gallery__item { flex: 0 0 78%; scroll-snap-align: center; }
+}
